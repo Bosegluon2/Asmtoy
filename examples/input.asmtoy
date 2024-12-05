@@ -1,0 +1,72 @@
+# show “sad”：打印"sad"，遵循转义字符规则（例如"\n"） 
+# num axx：声明num变量axx，默认为0 
+# assign a 10：将10赋值给a（前提是a已被声明且仅限num） 
+# assign a b：将b变量赋值给a（前提是b和a都是num）
+# inputnum a: 获取用户输入数字并存储到a中（前提是a已被声明） 
+# str b：声明字符串b
+# goto x：将阅读指针跳到label是x的地方，x为str变量（可以和if结合实现loop）
+# goto ”asd“：将阅读指针跳到label是”asd“的地方（注意label可以在上文也可以在下文）
+# label ”asd“ 此处label是”asd“（禁止将变量赋值给label，可能会导致不可预料的后果）
+# cpystr b “xxxxx”：将”xxxxx“赋值给b 
+# cpystr b c：将c赋值给b（前提是b和c都是str）
+# show b：打印b变量，其中b可以是num也可以是str
+# if a x：如果a=x（仅限num）的话，读取下一行，否则读取下下一行 
+# add a 1 3：等效于c++中的“a=1+3”（仅限num） 
+# add a a 1：等效于c++中的“a++”（仅限num）  
+# add a a b：等效于c++中的“a+=b”（仅限num）
+# 类似运算符还包含sub div mul
+# 定义无参函数可使用以下语法。以下定义了一个名字叫作test的无参函数
+# proc test
+# | add a a b
+# | if a 10
+# | return
+# | add a a b
+# 函数体中使用“| ”表示处于函数体内，return 为退出函数体，否则执行完整个函数体
+# call test：调用函数test。call和proc的先后顺序不重要
+
+
+
+# 这是一个斐波那契函数的代码
+# 声明变量
+num n
+num a
+num b
+num temp
+num i
+
+# 获取用户输入 n（斐波那契数列的项数）
+inputnum n
+
+# 初始化
+assign a 0
+assign b 1
+assign i 0
+
+# 输出第一项
+show a
+show "\n"
+# 输出第二项
+if n 1
+goto end
+show b
+show "\n"
+# 循环输出后续项
+label "loop"
+if i n
+goto "end"
+add i i 1
+
+# 计算下一项
+assign temp b
+add b b a
+assign a temp
+
+# 打印下一项
+show b
+show "\n"
+# 跳回循环
+goto "loop"
+
+# 结束
+label "end"
+show "完成"
